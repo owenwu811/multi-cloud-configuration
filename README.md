@@ -1,7 +1,7 @@
-# I built a terraform module that can be used to host a web application across both AWS and Azure clouds for failover and for business critical applications. 
+# I built a terraform module that can be used to host a full-stack web application across both AWS and Azure clouds for failover and for business critical applications. 
 
 #current known bugs that I discovered during testing:
-#azure resource groups needed to be manually deleted using the management console. Terraform destroy would delete everything except azure resource groups
+#azure resource groups needed to be manually deleted using the management console. Terraform destroy would delete all infrastructure except Azure resource groups.
 
 #other notes and observations:
 #during testing, I noticed that some resources look much longer than others to destroy, such as the azure LB resource, took much longer to delete than other 
