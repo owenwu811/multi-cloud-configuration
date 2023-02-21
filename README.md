@@ -7,3 +7,6 @@ Other notes and observations:
 resources. It took 3 minutes on average for terraform destroy to delete this resource while the azure virtual network, for example, took only 12 seconds on a run for 
 terraform destroy to terminate it. 
 The aws_db instance took, on average, the longest to destroy, at 3 min 31s on one run. 
+
+Note:
+1. make sure to run Terraform Destroy after you provision infrastructure, or you maybe charged
