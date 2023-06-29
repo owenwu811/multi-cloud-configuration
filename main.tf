@@ -77,7 +77,7 @@ resource "azurerm_virtual_machine" "main" {
     environment = "staging"
   }
 }
-
+#importing infrastructure into terraform's control
 data "aws_ami" "ubuntu" {
   most_recent = true
 
