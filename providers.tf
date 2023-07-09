@@ -10,3 +10,9 @@ terraform {
 provider "azurerm" {
   features {}
 }
+
+provider "aws" {
+    region = "enterhere"
+    access_key = "enterhere"
+    secret_key = "enterhere"
+}
