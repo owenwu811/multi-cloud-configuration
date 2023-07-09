@@ -64,22 +64,6 @@ resource "azurerm_mysql_server" "example" {
   ssl_minimal_tls_version_enforced  = "TLS1_2"
 }
 
-resource "aws_default_vpc" "default" {
-  tags = {
-    Name = "Default VPC"
-  }
-}
-
-resource "aws_vpc_ipv4_cidr_block_association" "secondary_cidr" {
-  vpc_id     = aws_default_vpc.default.id
-  cidr_block = "172.2.0.0/16"
-}
-
-resource "aws_subnet" "in_secondary_cidr" {
-  vpc_id     = aws_vpc_ipv4_cidr_block_association.secondary_cidr.vpc_id
-  cidr_block = "172.2.0.0/24"
-}
-
 resource "azurerm_resource_group" "LBresource" {
   name     = "LoadBalancerRG"
   location = "West Europe"
