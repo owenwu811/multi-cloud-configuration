@@ -221,11 +221,6 @@ resource "azurerm_network_security_group" "example" {
 #Configure AWS Provider
 #Operational environment is set to run in <us-east-1> region
 
-provider "aws" {
-    region = "enterhere"
-    access_key = "enterhere"
-    secret_key = "enterhere"
-}
 
 #Configure custom VPC
 resource "aws_vpc" "TF_vpc" {
