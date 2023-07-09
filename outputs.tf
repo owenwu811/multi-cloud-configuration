@@ -7,3 +7,7 @@ output "AmazonLinux_availability_zone" {
 output "Ubuntu_availability_zone" {
   value = aws_instance.mySecond_TF-server.availability_zone
 }
+
+output "Load_Balancer_DNS" {
+    value = aws_elb.my-elb.dns_name
+}
