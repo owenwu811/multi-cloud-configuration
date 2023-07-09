@@ -163,31 +163,3 @@ resource "azurerm_lb" "testLB" {
     public_ip_address_id = azurerm_public_ip.example.id
   }
 }
-resource "aws_s3_bucket" "b2" {
-  bucket = "thisismybucket"
-
-  tags = {
-    Name        = "My bucket"
-    Environment = "Dev"
-  }
-}
-
-resource "aws_s3_bucket_acl" "example" {
-  bucket = aws_s3_bucket.b2.id
-  acl    = "private"
-}
-
-
-resource "aws_security_group" "allow_tls_second" {
-  name        = "allow_tls_second"
-  description = "Allow TLS inbound traffic"
-  vpc_id      = aws_default_vpc.default.id
-
-  ingress {
-    description      = "TLS from VPC"
-    from_port        = 443
-    to_port          = 443
-    protocol         = "tcp"
-  }
-}
-
