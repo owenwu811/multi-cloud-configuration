@@ -487,11 +487,6 @@ resource "aws_instance" "mySecond_TF-server" {
   }
 }
 
-#Terraform console output
-output "Ubuntu_availability_zone" {
-  value = aws_instance.mySecond_TF-server.availability_zone
-}
-
 resource "aws_elb" "my-elb" {
     name               = "my-elb"
     subnets = [aws_subnet.TF_subnet_1a.id, aws_subnet.TF_subnet_1b.id]
@@ -521,8 +516,4 @@ resource "aws_elb" "my-elb" {
     tags = {
         Name = "my-elb"
     }
-}
-
-output "Load_Balancer_DNS" {
-    value = aws_elb.my-elb.dns_name
 }
