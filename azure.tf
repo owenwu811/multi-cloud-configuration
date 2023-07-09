@@ -10,6 +10,56 @@ resource "azurerm_virtual_network" "main" {
   resource_group_name = azurerm_resource_group.example.name
 }
 
+
+resource "azurerm_resource_group" "dbresource" {
+  name     = "example-resources"
+  location = "West Europe"
+}
+
+resource "azurerm_mysql_server" "example" {
+  name                = "sqlserverowen"
+  location            = azurerm_resource_group.dbresource.location
+  resource_group_name = azurerm_resource_group.dbresource.name
+  
+  administrator_login          = "mysqladminun"
+  administrator_login_password = "H@Sh1CoR3!"
+
+  sku_name   = "B_Gen5_2"
+  storage_mb = 5120
+  version    = "5.7"
+
+  auto_grow_enabled                 = true
+  backup_retention_days             = 7
+  geo_redundant_backup_enabled      = false
+  infrastructure_encryption_enabled = false
+  public_network_access_enabled     = true
+  ssl_enforcement_enabled           = true
+  ssl_minimal_tls_version_enforced  = "TLS1_2"
+}
+
+resource "azurerm_resource_group" "LBresource" {
+  name     = "LoadBalancerRG"
+  location = "West Europe"
+}
+
+resource "azurerm_public_ip" "example" {
+  name                = "PublicIPForLB"
+  location            = azurerm_resource_group.LBresource.location
+  resource_group_name = azurerm_resource_group.LBresource.name
+  allocation_method   = "Static"
+}
+
+resource "azurerm_lb" "testLB" {
+  name                = "TestLoadBalancer"
+  location            = azurerm_resource_group.LBresource.location
+  resource_group_name = azurerm_resource_group.LBresource.name
+
+  frontend_ip_configuration {
+    name                 = "PublicIPAddress"
+    public_ip_address_id = azurerm_public_ip.example.id
+  }
+}
+
 resource "azurerm_subnet" "internal" {
   name                 = "internal"
   resource_group_name  = azurerm_resource_group.example.name
