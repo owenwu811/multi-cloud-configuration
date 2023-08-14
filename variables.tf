@@ -1,3 +1,1 @@
-variable "prefix" {
-  default = "tfvmex"
-}
+
